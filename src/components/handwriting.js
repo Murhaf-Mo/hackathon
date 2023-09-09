@@ -14,7 +14,7 @@ const Handwriting = () => {
 
         try {
             const response = await axios.post(
-                `https://api.cloudinary.com/v1_1/ddpbsrzc6/image/upload`,
+                `https://api.cloudinary.com/v1_1/----/image/upload`,
                 formData
             );
             return response.data.url;
