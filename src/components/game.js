@@ -31,7 +31,7 @@ function Game() {
             timer = setInterval(() => {
                 // Directly calculate the updated score inside setInterval
                 const newElapsedTime = new Date().getTime() - startTime;
-                const newScore = (score => score  - (newElapsedTime / 1000) * 2)
+                const newScore = (score => score  - (newElapsedTime / 1000) * 1.5)
                 setScore(newScore);
                 setElapsedTime(newElapsedTime);
                 console.log("score", newScore, "wrongAttempts", wrongAttempts, newElapsedTime / 1000);
@@ -45,8 +45,14 @@ function Game() {
         setStartTime(new Date().getTime());
         setGameStarted(true);
     };
+    // Generate random initial positions
+    const randomInitialPosition = () => {
+        const x = Math.random() * 1000 - 500;  // Random x-coordinate between -500 and 500
+        const y = Math.random() * 1000 - 500;  // Random y-coordinate between -500 and 500
+        return { x, y };
+    };
     const handleClick = (row, col) => {
-        setScore(score => score - 40);  // use functional update form
+        setScore(score => score - 20);  // use functional update form
         console.log("row", row, "col", col, "diamondRow", diamondRow, "diamondCol", diamondCol, "found", found, "gameStarted", gameStarted);
         if (!gameStarted || (found && initialGrid[row][col])) return;
 
@@ -81,27 +87,33 @@ function Game() {
             {found && <Confetti/>}
             <div>
                 {initialGrid.map((row, i) => (
-                    <div style={{display: 'flex'}}>
-                        {row.map((cell, j) => (
-                            <motion.div
-                                whileHover={{scale: 1.2, rotate: 90}}
-                                whileTap={{scale: 0.8, rotate: -90, borderRadius: '100%'}}
-                                style={{
-                                    width: '50px',
-                                    height: '50px',
-                                    border: '1px solid black',
-                                    borderRadius: '15%',
-                                    margin: '0.2rem',
-                                    display: 'flex',
-                                    backgroundColor: cell || '#FFFFFF',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}
-                                onClick={() => handleClick(i, j)}
-                            >
-                                {cell === 'diamond' && found && <SketchOutlined/>}
-                            </motion.div>
-                        ))}
+                    <div style={{ display: 'flex' }}>
+                        {row.map((cell, j) => {
+                            const initialPos = randomInitialPosition();
+                            return (
+                                <motion.div
+                                    key={j}  // Don't forget to add a key for list elements
+                                    initial={initialPos}
+                                    animate={{ x: 0, y: 0 }}
+                                    whileHover={{ scale: 1.2, rotate: 90 }}
+                                    whileTap={{ scale: 0.8, rotate: -90, borderRadius: '100%' }}
+                                    style={{
+                                        width: '50px',
+                                        height: '50px',
+                                        border: '1px solid black',
+                                        borderRadius: '15%',
+                                        margin: '0.2rem',
+                                        display: 'flex',
+                                        backgroundColor: cell || '#FFFFFF',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                    }}
+                                    onClick={() => handleClick(i, j)}
+                                >
+                                    {cell === 'diamond' && found && <SketchOutlined />}
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 ))}
             </div>

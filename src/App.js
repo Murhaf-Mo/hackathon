@@ -3,6 +3,11 @@ import {Breadcrumb, Layout, Menu, theme} from 'antd';
 import {Cards} from "./components/cards/cards";
 import Game from "./components/game";
 import Handwriting from "./components/handwriting";
+import MenuItem from "antd/es/menu/MenuItem";
+import BreadcrumbItem from "antd/es/breadcrumb/BreadcrumbItem";
+import AboutMe from "./components/journal/aboutme";
+import JournalApp from "./components/journal/journalapp";
+import StudyApp from "./components/study/studyapp";
 
 const {Header, Content, Footer} = Layout;
 
@@ -34,9 +39,11 @@ const App = () => {
                   defaultSelectedKeys={['Task List']}
                   onSelect={({ key }) => setActiveComponent(key)}
               >
-                  <Menu.Item key="Task List">TaskList</Menu.Item>
-                  <Menu.Item key="Find the Diamond">Find the Diamond</Menu.Item>
-                  <Menu.Item key="Handwriting">Handwriting</Menu.Item>
+                  <MenuItem key="Task List">TaskList</MenuItem>
+                  <MenuItem key="Find the Diamond">Find the Diamond</MenuItem>
+                  <MenuItem key="Handwriting">Handwriting</MenuItem>
+                  <MenuItem key="Journal App">Journal App</MenuItem>
+                  <MenuItem key={"Study App"}>Study App</MenuItem>
             </Menu>
 
           </Header>
@@ -50,7 +57,7 @@ const App = () => {
                   margin: '16px 0',
                 }}
             >
-              <Breadcrumb.Item> </Breadcrumb.Item>
+              <BreadcrumbItem> </BreadcrumbItem>
               {/*<Breadcrumb.Item>List</Breadcrumb.Item>*/}
               {/*<Breadcrumb.Item>App</Breadcrumb.Item>*/}
             </Breadcrumb>
@@ -65,6 +72,8 @@ const App = () => {
                 {activeComponent === "Task List" && <Cards />}
                 {activeComponent === "Find the Diamond" && <Game />}
                 {activeComponent === "Handwriting" && <Handwriting />}
+                {activeComponent === "Journal App" && <JournalApp />}
+                {activeComponent === "Study App" && <StudyApp />}
             </div>
           </Content>
           <Footer
@@ -72,7 +81,7 @@ const App = () => {
                 textAlign: 'center',
               }}
           >
-            DevMinds ©2023 Created by DevMinds
+            DevMinds Projects ©2023 Created by DevMinds
 
           </Footer>
         </Layout>

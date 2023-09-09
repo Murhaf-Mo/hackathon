@@ -39,7 +39,7 @@ const Handwriting = () => {
                     filename: file.name,
                 },
                 headers: {
-                    'X-RapidAPI-Key': '37533eb2bdmsha0575afe0568564p1897adjsn25b884ee0778',
+                    'X-RapidAPI-Key': 'YOUR_KEY_HERE',
                     'X-RapidAPI-Host': 'ocrly-image-to-text.p.rapidapi.com'
                 }
             };
