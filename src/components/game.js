@@ -46,7 +46,7 @@ function Game() {
         setGameStarted(true);
     };
     const handleClick = (row, col) => {
-        setScore(score => score - 40);  // use functional update form
+        setScore(score => score - 25);  // use functional update form
         console.log("row", row, "col", col, "diamondRow", diamondRow, "diamondCol", diamondCol, "found", found, "gameStarted", gameStarted);
         if (!gameStarted || (found && initialGrid[row][col])) return;
 
